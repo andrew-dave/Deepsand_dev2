@@ -14,6 +14,7 @@ find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED)
 #find_package(librealsense2 REQUIRED)
 find_package(realsense2 REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -22,24 +23,6 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package()
-
-# === ADD THIS BELOW ===
-#add_executable(depth_roi_publisher src/depth_roi_publisher.cpp)
-
-#ament_target_dependencies(depth_roi_publisher
-#  rclcpp
-#  sensor_msgs
-#  cv_bridge
-#  image_transport
-#  OpenCV
-#)
-
-
-#target_link_libraries(depth_roi_publisher
-#  ${OpenCV_LIBS}
-#  realsense2
-#)
 add_executable(depth_processor scripts/depth_processor.cpp)
 ament_target_dependencies(depth_processor rclcpp cv_bridge image_transport sensor_msgs OpenCV)
 
@@ -74,10 +57,20 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-# for motor control
-add_executable(motor_control src/motor_control.cpp)
-ament_target_dependencies(motor_control rclcpp)
+# for teleop robot client
+add_executable(teleop_client src/teleop_client.cpp)
+target_link_libraries(teleop_client gpiodcxx)
+ament_target_dependencies(teleop_client rclcpp geometry_msgs)
 install(TARGETS
-  motor_control
+  teleop_client
   DESTINATION lib/${PROJECT_NAME}
 )
+
+# for teleop host
+add_executable(teleop_host src/teleop_host.cpp)
+target_link_libraries(teleop_host SDL2)
+ament_target_dependencies(teleop_host rclcpp geometry_msgs)
+
+install(TARGETS teleop_host DESTINATION lib/${PROJECT_NAME})
+
+ament_package()
