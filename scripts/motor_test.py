@@ -5,7 +5,7 @@ import time
 GPIO.setmode(GPIO.BOARD)
 # 7, 15, 29, 31, 32, 33
 # Define pins
-IN1 = 29  # Pin 31 (soc_gpio33_pq6) for IN1
+IN1 = 32  # Pin 31 (soc_gpio33_pq6) for IN1
 IN2 = 31  # Pin 33 (soc_gpio21_pr0) for IN2
 
 # Setup pins as outputs

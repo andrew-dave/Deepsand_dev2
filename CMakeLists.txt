@@ -14,6 +14,7 @@ find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED)
 # find_package(librealsense2 REQUIRED)
 # find_package(realsense2 REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
 find_package(realsense2 QUIET)
@@ -91,8 +92,8 @@ endif()
 # for teleop robot client
 if(GPIOD_FOUND)
 add_executable(teleop_client src/teleop_client.cpp)
-target_link_libraries(teleop_client gpiodcxx)
-ament_target_dependencies(teleop_client rclcpp geometry_msgs)
+target_link_libraries(teleop_client gpiodcxx serialport)
+ament_target_dependencies(teleop_client rclcpp geometry_msgs std_msgs)
 install(TARGETS
   teleop_client
   DESTINATION lib/${PROJECT_NAME}
