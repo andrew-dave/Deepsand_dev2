@@ -33,7 +33,7 @@ public:
         }
 
         // Serial setup
-        sp_get_port_by_name("/dev/ttyUSB0", &port_);
+        sp_get_port_by_name("/dev/ttyACM0", &port_);
         sp_open(port_, SP_MODE_READ_WRITE);
         sp_set_baudrate(port_, 115200);
         sp_set_bits(port_, 8);
