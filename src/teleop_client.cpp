@@ -9,7 +9,7 @@
 
 class MotorControl : public rclcpp::Node {
 public:
-    MotorControl() : Node("motor_control") {
+    MotorControl() : Node("teleop_client") {
         sub_ = create_subscription<geometry_msgs::msg::Twist>(
             "/cmd_vel", 10, std::bind(&MotorControl::cmd_vel_callback, this, std::placeholders::_1));
         

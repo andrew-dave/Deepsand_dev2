@@ -5,7 +5,7 @@
 
 class TeleopNode : public rclcpp::Node {
 public:
-    TeleopNode() : Node("teleop_node") {
+    TeleopNode() : Node("teleop_host") {
         pub_ = create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
         timer_ = create_wall_timer(std::chrono::milliseconds(100), std::bind(&TeleopNode::update, this));
         
