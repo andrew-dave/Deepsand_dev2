@@ -1,6 +1,10 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/float32.hpp>
+
+#ifdef USE_LIBSERIAL
 #include <libserial/SerialPort.h>
+#endif
+
 #include <string>
 
 using namespace LibSerial;

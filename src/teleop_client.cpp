@@ -1,6 +1,10 @@
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
+
+#ifdef USE_LIBSERIAL
 #include <gpiod.hpp>
+#endif
+
 #include <array>
 
 class MotorControl : public rclcpp::Node {
