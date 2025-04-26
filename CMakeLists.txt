@@ -16,6 +16,7 @@ find_package(OpenCV REQUIRED)
 # find_package(realsense2 REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
 
 find_package(realsense2 QUIET)
 
@@ -63,19 +64,32 @@ install(TARGETS
 
 # This is for the depth camera
 if(realsense2_FOUND)
+# 1: Older implementation that publishes images
 add_executable(depth_publisher src/depth_publisher.cpp)
 ament_target_dependencies(depth_publisher
   rclcpp
   sensor_msgs
+  image_transport
   cv_bridge
   OpenCV
   realsense2
 )
-target_link_libraries(depth_publisher realsense2)
+target_link_libraries(depth_publisher realsense2 ${OpenCV_LIBS})
 install(TARGETS
   depth_publisher
   DESTINATION lib/${PROJECT_NAME}
 )
+# 2A: New implementation that publishes depth information as raw int 16 multiarray
+add_executable(depth_publisher_e src/depth_publisher_e.cpp)
+ament_target_dependencies(depth_publisher_e rclcpp std_msgs realsense2)
+target_link_libraries(depth_publisher_e realsense2)
+install(TARGETS depth_publisher_e DESTINATION lib/${PROJECT_NAME})
+
+# 2B: This is the node that processes the raw data
+add_executable(depth_to_img src/depthtoimg.cpp)
+ament_target_dependencies(depth_to_img rclcpp std_msgs sensor_msgs cv_bridge OpenCV)
+install(TARGETS depth_to_img DESTINATION lib/${PROJECT_NAME})
+
 endif()
 
 # This is for the loadcell
@@ -106,5 +120,9 @@ target_link_libraries(teleop_host SDL2)
 ament_target_dependencies(teleop_host rclcpp geometry_msgs)
 
 install(TARGETS teleop_host DESTINATION lib/${PROJECT_NAME})
+
+# Launch file for Depth+(loadcell+blade_angle)
+install(DIRECTORY launch
+        DESTINATION share/${PROJECT_NAME})
 
 ament_package()

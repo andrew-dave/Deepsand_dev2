@@ -15,7 +15,7 @@ public:
         cmd_vel_sub_ = create_subscription<geometry_msgs::msg::Twist>(
             "/cmd_vel", 10, std::bind(&MotorControl::cmd_vel_callback, this, std::placeholders::_1));
         servo_sub_ = create_subscription<std_msgs::msg::Int16>(
-            "/set_servo_angle", 10, std::bind(&MotorControl::servo_callback, this, std::placeholders::_1));
+            "/blade_angle", 10, std::bind(&MotorControl::servo_callback, this, std::placeholders::_1));
         
         // Publisher
         load_cell_pub_ = create_publisher<std_msgs::msg::Float32>("/load_cell", 10);

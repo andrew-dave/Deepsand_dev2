@@ -12,7 +12,7 @@
 
 class DepthROIPublisher : public rclcpp::Node {
 public:
-    DepthROIPublisher() : Node("depth_roi_publisher") {
+    DepthROIPublisher() : Node("depth_publisher") {
         image_pub_ = this->create_publisher<sensor_msgs::msg::Image>("/depth/roi_image", 10);
         bridge_ = std::make_shared<cv_bridge::CvImage>();
 
@@ -41,7 +41,7 @@ public:
 
         // === Depth Stream Setup ===
         rs2::config cfg;
-        cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 30);
+        cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 15);
         pipe_.start(cfg);
 
         timer_ = this->create_wall_timer(
