@@ -17,11 +17,11 @@ public:
 
         // Depth Stream Setup
         rs2::config cfg;
-        cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 15);
+        cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 5);
         pipe_.start(cfg);
 
         timer_ = this->create_wall_timer(
-            std::chrono::milliseconds(66),  // ~15 FPS
+            std::chrono::milliseconds(200),  // ~5 FPS
             std::bind(&DepthPublisher::timer_callback, this));
     }
 

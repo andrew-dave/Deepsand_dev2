@@ -15,7 +15,7 @@ def generate_launch_description():
             name='depth_publisher_e',
             output='screen',
             parameters=[
-                {'depth_module.profile': '640x480x30'}
+                {'depth_module.profile': '640x480x5'}
             ]
         )
     ])

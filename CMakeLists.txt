@@ -17,7 +17,7 @@ find_package(OpenCV REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
-
+find_package(PkgConfig REQUIRED)
 find_package(realsense2 QUIET)
 
 # Try finding libgpiod - for host
