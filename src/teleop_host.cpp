@@ -46,11 +46,11 @@ private:
 
         // Servo control (Up/Down)
         if (keys[SDL_SCANCODE_UP]) {
-            current_angle_ = std::min(current_angle_ + 10, 150);
+            current_angle_ = std::min(current_angle_ + 1, 180);
             servo_msg.data = current_angle_;
             servo_pub_->publish(servo_msg);
         } else if (keys[SDL_SCANCODE_DOWN]) {
-            current_angle_ = std::max(current_angle_ - 10, 50);
+            current_angle_ = std::max(current_angle_ - 1, 50);
             servo_msg.data = current_angle_;
             servo_pub_->publish(servo_msg);
         }

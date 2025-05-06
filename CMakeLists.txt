@@ -84,13 +84,12 @@ add_executable(depth_publisher_e src/depth_publisher_e.cpp)
 ament_target_dependencies(depth_publisher_e rclcpp std_msgs realsense2)
 target_link_libraries(depth_publisher_e realsense2)
 install(TARGETS depth_publisher_e DESTINATION lib/${PROJECT_NAME})
+endif()
 
 # 2B: This is the node that processes the raw data
 add_executable(depth_to_img src/depthtoimg.cpp)
 ament_target_dependencies(depth_to_img rclcpp std_msgs sensor_msgs cv_bridge OpenCV)
 install(TARGETS depth_to_img DESTINATION lib/${PROJECT_NAME})
-
-endif()
 
 # This is for the loadcell
 if(LIBSERIAL_FOUND)
