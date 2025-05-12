@@ -17,7 +17,7 @@ public:
 
         // Depth Stream Setup
         rs2::config cfg;
-        cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 5);
+        cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 15);
         pipe_.start(cfg);
 
         timer_ = this->create_wall_timer(
