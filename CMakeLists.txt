@@ -120,8 +120,16 @@ ament_target_dependencies(teleop_host rclcpp geometry_msgs)
 
 install(TARGETS teleop_host DESTINATION lib/${PROJECT_NAME})
 
+install(PROGRAMS
+  src/robotpose_pub.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+
 # Launch file for Depth+(loadcell+blade_angle)
 install(DIRECTORY launch
         DESTINATION share/${PROJECT_NAME})
+
+        
 
 ament_package()
