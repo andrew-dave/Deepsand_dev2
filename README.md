@@ -1,4 +1,4 @@
-# 🏗️ DeepSand - ROS 2 Package: `deploadblade`
+# DeepSand - ROS 2 Package: `deploadblade`
 
 `deploadblade` is a ROS 2-based software architecture for semi-autonomous surface grading. It enables communication between a teleoperation host and a client-side embedded control unit (ESP32) to command robot motion, blade actuation, and monitor sensory feedback like depth and load.
 
