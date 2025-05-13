@@ -39,3 +39,19 @@ The system is divided into two main parts:
 ```bash
 colcon build --packages-select deploadblade
 source install/setup.bash
+```
+
+### 2. Launch Host Side
+```bash
+ros2 launch deploadblade dlb-host.launch
+$ Optionally run Foxglove studio and its Websocket bridge
+ros2 run foxglove_bridge foxglove_bridge
+```
+
+### 3. Launch Client Side
+```bash
+ros2 launch deploadblade dlb-client.launch
+```
+
+
+
